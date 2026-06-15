@@ -35,7 +35,8 @@ graph TD
 
     %% Audio Input Layer
     Input(["Mixed Audio Input<br/>Stream / .wav"]):::inputNode --> VADNode["Silero VAD Module<br/>(Voice Activity Detection)"]:::preprocNode
-    VADNode --> ResampleNode["TorchAudio Resampling Engine<br/>(Uniform 16 kHz Mono)"]:::preprocNode
+    VADNode --> ResampleNode["TorchAudio Resampling Engine
+<br/>(Uniform 16 kHz Mono)"]:::preprocNode
     ResampleNode --> CoreSelector{"Neural Core<br/>Router"}:::routerNode
     
     %% Deep Learning Core Chains
