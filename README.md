@@ -100,7 +100,7 @@ It is highly recommended to isolate project dependencies using a virtual environ
 python -m venv venv
 venv\Scripts\activate
 ```
-*(For Linux/macOS use: `python3 -m venv venv` and `source venv/bin/activate`)*
+*(For Linux/macOS use: `python3.11 -m venv venv` and `source venv/bin/activate`)*
 
 ### 3. Environment Dependencies Setup
 Make sure you have `Python 3.11` or newer installed before proceeding.
