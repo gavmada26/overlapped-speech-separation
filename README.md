@@ -24,23 +24,31 @@ The platform bridges the gap between classical Digital Signal Processing (DSP) t
 <summary><b>🔍 Click to collapse/expand the Interactive System Architecture Diagram</b></summary>
 
 ```mermaid
-graph LR
+graph TD
+    %% Define Node Colors and Styles
+    classDef inputNode fill:#2c3e50,stroke:#34495e,stroke-width:2px,color:#fff;
+    classDef preprocNode fill:#d35400,stroke:#ba4a00,stroke-width:2px,color:#fff;
+    classDef routerNode fill:#8e44ad,stroke:#7d3c98,stroke-width:2px,color:#fff;
+    classDef modelNode fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:#fff;
+    classDef dspNode fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:#fff;
+    classDef outputNode fill:#c0392b,stroke:#a93226,stroke-width:2px,color:#fff;
+
     %% Audio Input Layer
-    Input(["Mixed Audio Input<br/>Stream / .wav"]) --> VADNode["Silero VAD Module<br/>(Voice Activity Detection)"]
-    VADNode --> ResampleNode["TorchAudio Resampling Engine<br/>(Uniform 16 kHz Mono)"]
-    ResampleNode --> CoreSelector{"Neural Core Router"}
+    Input(["Mixed Audio Input<br/>Stream / .wav"]):::inputNode --> VADNode["Silero VAD Module<br/>(Voice Activity Detection)"]:::preprocNode
+    VADNode --> ResampleNode["TorchAudio Resampling Engine<br/>(Uniform 16 kHz Mono)"]:::preprocNode
+    ResampleNode --> CoreSelector{"Neural Core<br/>Router"}:::routerNode
     
     %% Deep Learning Core Chains
-    CoreSelector -- "Scenario 1: Overlaps" --> SepFormer["SpeechBrain SepFormer<br/>(Attention-Based Models)"]
-    CoreSelector -- "Scenario 2: Music" --> Demucs["Meta Demucs Framework<br/>(Hybrid WaveNet Engine)"]
+    CoreSelector -- "Scenario 1:<br/>Overlaps" --> SepFormer["SpeechBrain SepFormer<br/>(Attention-Based Models)"]:::modelNode
+    CoreSelector -- "Scenario 2:<br/>Music" --> Demucs["Meta Demucs Framework<br/>(Hybrid WaveNet Engine)"]:::modelNode
     
     %% Post-Processing Layer
-    SepFormer --> DSPEnhance["DSP Post-Processing<br/>(Spectral NoiseReduce)"]
+    SepFormer --> DSPEnhance["DSP Post-Processing<br/>(Spectral NoiseReduce)"]:::dspNode
     Demucs --> DSPEnhance
     
     %% Targets / Analytics
-    DSPEnhance --> Metrics["Advanced Diagnostics Suite<br/>(SI-SDR / PESQ / ESTOI / SIM / DNSMOS)"]
-    DSPEnhance --> Interface["Gradio Interactive Web UI<br/>(Graphical Frontend)"]
+    DSPEnhance --> Metrics["Advanced Diagnostics Suite<br/>(SI-SDR / PESQ / ESTOI / SIM / DNSMOS)"]:::outputNode
+    DSPEnhance --> Interface["Gradio Interactive Web UI<br/>(Graphical Frontend)"]:::outputNode
 ```
 </details>
 
@@ -147,4 +155,3 @@ This development builds upon, integrates, and references the following fundament
 * **Department:** Department of Communications, Faculty of Electronics, Telecommunications and Information Technology (ETTI)
 * **Institution:** Technical University of Cluj-Napoca (UTCN), Romania
 * **Specialization:** Telecommunications Technologies and Systems (TST-RO)
-```
