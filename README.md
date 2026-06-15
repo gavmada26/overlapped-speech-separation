@@ -47,7 +47,8 @@ graph TD
     Demucs --> DSPEnhance
     
     %% Targets / Analytics
-    DSPEnhance --> Metrics["Advanced Diagnostics Suite<br/>(SI-SDR / PESQ / ESTOI / SIM / DNSMOS)"]:::outputNode
+    DSPEnhance --> Metrics["Advanced Diagnostics Suite<br/>(SI-SDR / PESQ / ESTOI
+/ SIM / DNSMOS)"]:::outputNode
     DSPEnhance --> Interface["Gradio Interactive Web UI<br/>(Graphical Frontend)"]:::outputNode
 ```
 </details>
