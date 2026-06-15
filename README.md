@@ -25,28 +25,21 @@ The platform routes multi-channel and single-channel audio mixtures through a mo
 ```mermaid
 graph LR
     %% Audio Input Layer
-    Input([Mixed Audio Input<br/>Stream / .wav])
-
-    %% Frame Scanning and Normalization Layer
-    Input --> VADNode[Silero VAD<br/>Scans Frames<br/>Extracts Active Speech<br/>Drops Silence]
-    VADNode --> ResampleNode[TorchAudio Resampler<br/>Normalizes Rate<br/>Uniform 16 kHz Mono]
-
-    %% Deep Learning Core Router
-    ResampleNode --> CoreSelector{Core Router}
-
-    %% Multi-Speaker Processing Chain
-    CoreSelector -- Scenario 1: Overlaps --> SepFormer[SpeechBrain<br/>SepFormer<br/>Attention Models]
-
-    %% Vocal/Music Dissection Chain
-    CoreSelector -- Scenario 2: Music --> Demucs[Meta Demucs<br/>Hybrid Conv<br/>Hybrid WaveNet]
-
-    %% Post-Processing Layer (Both paths converge here)
-    SepFormer --> DSPEnhance[DSP Post-Processing<br/>NoiseReduce<br/>Spectral Subtraction]
+    Input["Mixed Audio Input<br/>Stream / .wav"] --> VADNode["Silero VAD Module<br/>(Voice Activity Detection)"]
+    VADNode --> ResampleNode["TorchAudio Resampling Engine<br/>(Uniform 16 kHz Mono)"]
+    ResampleNode --> CoreSelector{"Neural Core Router"}
+    
+    %% Deep Learning Core Chains
+    CoreSelector -- "Scenario 1: Overlaps" --> SepFormer["SpeechBrain SepFormer<br/>(Attention-Based Models)"]
+    CoreSelector -- "Scenario 2: Music" --> Demucs["Meta Demucs Framework<br/>(Hybrid WaveNet Engine)"]
+    
+    %% Post-Processing Layer
+    SepFormer --> DSPEnhance["DSP Post-Processing<br/>(Spectral NoiseReduce)"]
     Demucs --> DSPEnhance
-
-    %% Output and Results Layer
-    DSPEnhance --> Metrics[[Analytics Diagnostics<br/>Full-Reference Benchmarks]]
-    DSPEnhance --> Interface[Gradio Graphical<br/>Interface (Web UI)]
+    
+    %% Targets / Analytics
+    DSPEnhance --> Metrics["Advanced Diagnostics Suite<br/>(SI-SDR / PESQ / ESTOI / SIM / DNSMOS)"]
+    DSPEnhance --> Interface["Gradio Interactive Web UI<br/>(Graphical Frontend)"]
 ```
 
 ### Modular Pipeline Execution:
