@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://python.org"><img src="https://img.shields.io/badge/Python-3.9%20%7C%203.10-blue?style=for-the-badge&logo=python" alt="Python"></a>
+  <a href="https://python.org"><img src="https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python" alt="Python"></a>
   <a href="https://pytorch.org"><img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white" alt="PyTorch"></a>
   <a href="https://gradio.app"><img src="https://img.shields.io/badge/Gradio-Frontend-orange?style=for-the-badge" alt="Gradio"></a>
   <a href="https://speechbrain.github.io"><img src="https://img.shields.io/badge/SpeechBrain-Framework-purple?style=for-the-badge" alt="SpeechBrain"></a>
@@ -47,8 +47,7 @@ graph TD
     Demucs --> DSPEnhance
     
     %% Targets / Analytics
-    DSPEnhance --> Metrics["Advanced Diagnostics Suite<br/>(SI-SDR / PESQ / ESTOI
-/ SIM / DNSMOS)"]:::outputNode
+    DSPEnhance --> Metrics["Advanced Diagnostics Suite<br/>(SI-SDR / PESQ / ESTOI / SIM / DNSMOS)"]:::outputNode
     DSPEnhance --> Interface["Gradio Interactive Web UI<br/>(Graphical Frontend)"]:::outputNode
 ```
 </details>
@@ -85,36 +84,31 @@ The platform was subjected to advanced simulation environments to stress operati
 
 ---
 
-## 📽️ Visual Previews & Demonstration Clips
-
-### Web Dashboard Layout
-*(Placeholder: Upload your custom layout interface file inside the assets folder to render below)*
-```text
-![Platform Interface Preview](assets/interface_screenshot.png)
-```
-
-### Real-Time Demo Walkthrough
-The following video demonstrates audio multi-track ingestion, model switching, VAD segment compression, and matplotlib interactive spectrogram plotting:
-
-https://github.com/user-attachments/assets/YOUR_MP4_VIDEO_ID_HERE
-*(Tip: Edit this file on the GitHub web interface and drag-and-drop your demo .mp4 file right into this line to auto-generate the streaming player element)*
-
----
-
 ## 🚀 Deployment & Installation
 
 ### 1. Clone the Codebase
 ```bash
-git clone [https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME.git)
-cd YOUR_REPOSITORY_NAME
+git clone [https://github.com/gavmada26/overlapped-speech-separation.git](https://github.com/gavmada26/overlapped-speech-separation.git)
+cd overlapped-speech-separation
 ```
 
-### 2. Environment Dependencies Setup
+### 2. Create and Activate a Virtual Environment
+It is highly recommended to isolate project dependencies using a virtual environment.
+
+**Windows:**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+*(For Linux/macOS use: `python3 -m venv venv` and `source venv/bin/activate`)*
+
+### 3. Environment Dependencies Setup
+Make sure you have `Python 3.11` or newer installed before proceeding.
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Initialize the Web Interface
+### 4. Initialize the Web Interface
 Execute the primary orchestration script to host the local server:
 ```bash
 python main.py
