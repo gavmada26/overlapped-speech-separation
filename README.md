@@ -23,42 +23,30 @@ The platform bridges the gap between classical Digital Signal Processing (DSP) t
 The platform routes multi-channel and single-channel audio mixtures through a modular execution pipeline optimized for processing throughput, mathematical precision, and low-latency rendering:
 
 ```mermaid
-graph TD
+graph LR
     %% Audio Input Layer
-    Input[Mixed Audio Input Stream / .wav] --> VAD[Silero Voice Activity Detection]
-    
-    %% Frame Trimming and Standardization
-    VAD -->|Active Speech Timestamps| Stitch[Dynamic Segment Stitching]
-    VAD -->|Silent Intervals Dropped| Resample[TorchAudio Resampling Core]
-    Stitch --> Resample
-    
-    %% Separation Routing Core
-    Resample -->|Standardized Uniform 16 kHz Signal| CoreRouting{Neural Core Selector}
-    
-    %% Deep Learning Execution Chains
-    CoreRouting -->|Scenario 1: Multi-Speaker Isolation| SepFormer[SpeechBrain SepFormer Models]
-    CoreRouting -->|Scenario 2: Audio Dissection & Stems| Demucs[Meta Demucs Hybrid WaveNet Engine]
-    
-    %% DSP Subtraction Layer
-    SepFormer --> DSP[DSP Post-Processing: Non-Linear NoiseReduce]
-    Demucs --> DSP
-    
-    %% Target Interfaces
-    DSP --> Analytics[Advanced Quality Diagnostics Suite]
-    DSP --> Interface[Gradio Graphical Dark-Mode Frontend]
-    
-    %% Evaluation Parameters
-    Analytics -->|Objective Mathematical Scores| Metrics[SI-SDR / PESQ / ESTOI / SIM / DNSMOS ITU-T P.808]
+    Input([Mixed Audio Input<br/>Stream / .wav])
 
-    %% Formatting Nodes Styles
-    style Input fill:#2c3e50,stroke:#34495e,stroke-width:2px,color:#fff
-    style VAD fill:#7f8c8d,stroke:#95a5a6,stroke-width:2px,color:#fff
-    style CoreRouting fill:#d35400,stroke:#ba4a00,stroke-width:2px,color:#fff
-    style SepFormer fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:#fff
-    style Demucs fill:#16a085,stroke:#117a65,stroke-width:2px,color:#fff
-    style DSP fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:#fff
-    style Analytics fill:#8e44ad,stroke:#7d3c98,stroke-width:2px,color:#fff
-    style Interface fill:#2c3e50,stroke:#34495e,stroke-width:2px,color:#fff
+    %% Frame Scanning and Normalization Layer
+    Input --> VADNode[Silero VAD<br/>Scans Frames<br/>Extracts Active Speech<br/>Drops Silence]
+    VADNode --> ResampleNode[TorchAudio Resampler<br/>Normalizes Rate<br/>Uniform 16 kHz Mono]
+
+    %% Deep Learning Core Router
+    ResampleNode --> CoreSelector{Core Router}
+
+    %% Multi-Speaker Processing Chain
+    CoreSelector -- Scenario 1: Overlaps --> SepFormer[SpeechBrain<br/>SepFormer<br/>Attention Models]
+
+    %% Vocal/Music Dissection Chain
+    CoreSelector -- Scenario 2: Music --> Demucs[Meta Demucs<br/>Hybrid Conv<br/>Hybrid WaveNet]
+
+    %% Post-Processing Layer (Both paths converge here)
+    SepFormer --> DSPEnhance[DSP Post-Processing<br/>NoiseReduce<br/>Spectral Subtraction]
+    Demucs --> DSPEnhance
+
+    %% Output and Results Layer
+    DSPEnhance --> Metrics[[Analytics Diagnostics<br/>Full-Reference Benchmarks]]
+    DSPEnhance --> Interface[Gradio Graphical<br/>Interface (Web UI)]
 ```
 
 ### Modular Pipeline Execution:
