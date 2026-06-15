@@ -1,7 +1,7 @@
 # Intelligent Overlapped Speech Separation & Audio Enhancement Platform
 
 <p align="center">
-  <img src="/logo.png" alt="Project Logo" width="160" height="160">
+  <img src="logo.svg" alt="Project Logo" width="160" height="160">
 </p>
 
 <p align="center">
