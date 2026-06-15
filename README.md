@@ -88,7 +88,7 @@ The platform was subjected to advanced simulation environments to stress operati
 
 ### 1. Clone the Codebase
 ```bash
-git clone [https://github.com/gavmada26/overlapped-speech-separation.git](https://github.com/gavmada26/overlapped-speech-separation.git)
+git clone https://github.com/gavmada26/overlapped-speech-separation.git
 cd overlapped-speech-separation
 ```
 
