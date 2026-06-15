@@ -1,0 +1,12 @@
+torch
+torchaudio
+speechbrain
+gradio
+noisereduce
+soundfile
+numpy
+matplotlib
+pesq
+pystoi
+speechmos
+demucs
