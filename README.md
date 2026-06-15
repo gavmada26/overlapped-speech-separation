@@ -20,12 +20,13 @@ The platform bridges the gap between classical Digital Signal Processing (DSP) t
 
 ## 🏗️ System Architecture & Workflow Diagram
 
-The platform routes multi-channel and single-channel audio mixtures through a modular execution pipeline optimized for processing throughput, mathematical precision, and low-latency rendering:
+<details open>
+<summary><b>🔍 Click to collapse/expand the Interactive System Architecture Diagram</b></summary>
 
 ```mermaid
 graph LR
     %% Audio Input Layer
-    Input["Mixed Audio Input<br/>Stream / .wav"] --> VADNode["Silero VAD Module<br/>(Voice Activity Detection)"]
+    Input(["Mixed Audio Input<br/>Stream / .wav"]) --> VADNode["Silero VAD Module<br/>(Voice Activity Detection)"]
     VADNode --> ResampleNode["TorchAudio Resampling Engine<br/>(Uniform 16 kHz Mono)"]
     ResampleNode --> CoreSelector{"Neural Core Router"}
     
@@ -41,6 +42,7 @@ graph LR
     DSPEnhance --> Metrics["Advanced Diagnostics Suite<br/>(SI-SDR / PESQ / ESTOI / SIM / DNSMOS)"]
     DSPEnhance --> Interface["Gradio Interactive Web UI<br/>(Graphical Frontend)"]
 ```
+</details>
 
 ### Modular Pipeline Execution:
 * **Voice Activity Detection (VAD):** Employs Silero VAD via PyTorch Hub to scan incoming vectors, discard silence windows, and stitch together active speech frames to reduce redundant computational overhead.
@@ -145,3 +147,4 @@ This development builds upon, integrates, and references the following fundament
 * **Department:** Department of Communications, Faculty of Electronics, Telecommunications and Information Technology (ETTI)
 * **Institution:** Technical University of Cluj-Napoca (UTCN), Romania
 * **Specialization:** Telecommunications Technologies and Systems (TST-RO)
+```
